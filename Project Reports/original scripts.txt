@@ -1,0 +1,67 @@
+Learning Outcomes (LO) Evaluated:
+•	LO1: Students can describe various computational principles and standard image processing operators in computer vision.
+•	LO2: Students can explain local features along with their detectors and descriptors.
+•	LO3: Students can apply various features to find correspondences between images and perform recognition.
+•	LO4: Students can build a feature-based image recognition system.
+
+
+Project Report:
+•    Introduction: Explain the problem to be solved by the image recognition system and its relation to LO1 and LO2.
+•    Methodology: Describe the methods used, including image processing operators, feature detectors, and recognition methods (as per LO3).
+•    Implementation: Include technical details of the system implementation, such as libraries used (e.g., OpenCV), algorithms, and parameters set (LO4).
+•    Results and Discussion: Present the experimental results, including recognition accuracy, system performance, and an analysis of the results.
+•    Conclusion: Provide an assessment of the system's performance and suggestions for further development.
+
+Report Draft
+Intro
+
+Some system that requires our presence like attendance system can be cheated with many ways like telling someone to literally take their attendance. This might seems not that serious but by looking at this problem some security issues like mimicking someone's identity to become that person is possible. Some other issues like twins can actually use their other twin's information because they have similar faces. Facial recognition actually already used for security reasons but let's just say it's not good enough. With that reason we decided to develop a robust face recognition system with anti spoofing using InceptionV3 and YOLOv8.
+
+Methodology
+
+In designing our system there will be five important steps, which is to first data gathering by collecting face of user in every angle and their own info, face detection using CNN modes such as ResNet50 and InceptionV3, Checking fake face (impersonating using photograph, wearing mask, etc), face prediction, lastly check if the face is actually match with the data.
+
+A. Data Gathering
+In order for our model to recognize students we will have to gather the student data by acquiring the student face picture to be used to train our face recognition model, acquiring approximately 1000 images per student with size of 224x224 p to be used to train and test our CNN model. Additionally, to train our anti-spoofing model we make utilize of an existing dataset to train our model which has a total of 7000 images (size of the picture).
+
+B. Face Recognition and Anti-Spoofing
+In our research, we utilize deep learning for both face recognition and anti-spoofing. This is because deep learning is a useful model to detect faces and identify its features. To make this combined system, we incorporated face recognition with anti-spoofing.
+
+B.1. Training
+In the training process, face recognition will utilize of CNN model such as Resnet50 & InceptionV3 as it is well known for its ability in detecting faces and gathering features of the face. An overview of how CNN works is on Fig. 1. We implement hyper parameters such as cross validation, early-stop, and learning rate to avoid overfitting and improve the model further.
+
+Furthermore, our anti-spoofing detection will utilize of YOLOV8, this algorithm is good for anti-spoofing due to its speed and high accuracy in objects or faces. By training the model with datasets that include fake and real, the model will learn to distinguish real and fake faces based on the label of the dataset.
+
+B.2. Anti-Spoofing
+In the anti-spoofing process, we will train our model with a dataset that includes pictures of genuine faces and spoofed faces. Dataset will be trained using a supervised learning approach. During the training process the model slowly adapts and learns to distinguish genuine and spoofed based on the provided dataset. 
+
+Once a student is recognized we will then match the student with their own respective data. To match the student, we compare the id of the student to excel file of student data if it exists or not, if it doesn’t exist then we will update the excel with the student id and the time and date of the attendance. If the id of student has already existed in the excel file, we will not update the excel however instead display that student data matched.
+
+Implementation
+
+A. Libraries
+We used standard libraries for Computer Vision which is OpenCV cv2 and cvzone, ultralytics to import YOLO for our anti-spoofing library, deep learning libraries such as sklearn and tensorflow keras, and basic python library for data processing such as numpy, matplotlib, os, time, and math
+
+B. Algorithm
+
+Anti-spoofing algorithm
+(Algorithm here)
+
+Face Recognition algorithm
+(Algorithm here)
+
+C. Parameters
+
+C.1. Base Model
+we make our model using ResNet50 as our base model. The ResNet50 is set without top and "imagenet" as it's weight. Our model layers are consists of: base model which is ResNet50, global average pooling layer, dense layer with 4096 neurons and "relu"activation, dropout layer, and last one dense layer with 11 neurons and "SoftMax" activation that acts as output layer.
+
+(include screenshots if needed)
+
+C.2. Model Training
+We use kfold algorithm with total of 5 folds to train the model. Splitting the training and testing data to 60% training and 40% testing (or 60:40 ratio). We fit the model with batch size 16, 20 epochs, and 1 verbose for each folds.
+
+(add more if needed)
+
+Conclusion
+
+(add conclusion)
